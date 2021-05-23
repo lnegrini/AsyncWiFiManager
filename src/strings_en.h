@@ -4,8 +4,8 @@
  * AsyncWiFiManager, a library for the ESP8266/Arduino platform
  * for configuration of WiFi credentials using a Captive Portal
  * 
- * @author Creator tzapu
- * @author tablatronix
+ * @author Creator lbussy
+ * @author lbussy
  * @version 0.0.0
  * @license MIT
  */
@@ -133,7 +133,7 @@ const char HTTP_HELP[]             PROGMEM =
  "<tr><td>/erase</td>"
  "<td>Erase WiFi configuration and reboot Device. Device will not reconnect to a network until new WiFi configuration data is entered.</td></tr>"
  "</table>"
- "<p/>More information about AsyncWiFiManager at <a href='https://github.com/tzapu/AsyncWiFiManager'>https://github.com/tzapu/AsyncWiFiManager</a>.";
+ "<p/>More information about AsyncWiFiManager at <a href='https://github.com/lbussy/AsyncWiFiManager'>https://github.com/lbussy/AsyncWiFiManager</a>.";
 #else
 const char HTTP_HELP[]             PROGMEM = "";
 #endif

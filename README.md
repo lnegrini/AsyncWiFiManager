@@ -1,23 +1,25 @@
 # AsyncWiFiManager
 Async ESP8266 WiFi Connection manager with fallback web configuration portal.
 
-# WiFiManager
+:exclamation: This is a private repo fork for my personal use. It should not be used by other projects. This fork is early work to enable Async capabilities, not all paths have been tested. Additonally, the below documentation has not been validated, so it may be lagging development.
+
+# AsyncWiFiManager
 ## DEVELOPMENT Version
 
 ESP8266 WiFi Connection manager with fallback web configuration portal
 
 :warning: This Documentation is out of date, see notes below
 
-[![Build Status](https://travis-ci.org/tzapu/WiFiManager.svg?branch=master)](https://travis-ci.org/tzapu/WiFiManager)
+[![Build Status](https://travis-ci.org/lbussy/AsyncWiFiManager.svg?branch=master)](https://travis-ci.org/lbussy/AsyncWiFiManager)
 
-[![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiManager.svg?)](https://www.ardu-badge.com/WiFiManager)
+[![arduino-library-badge](https://www.ardu-badge.com/badge/AsyncWiFiManager.svg?)](https://www.ardu-badge.com/AsyncWiFiManager)
 
-[![Build with PlatformIO](https://img.shields.io/badge/PlatformIO-Library-orange?)](https://platformio.org/lib/show/567/WiFiManager/installation)
+[![Build with PlatformIO](https://img.shields.io/badge/PlatformIO-Library-orange?)](https://platformio.org/lib/show/567/AsyncWiFiManager/installation)
 
 ![ESP8266](https://img.shields.io/badge/ESP-8266-000000.svg?longCache=true&style=flat&colorA=CC101F)
 ![ESP32](https://img.shields.io/badge/ESP-32-000000.svg?longCache=true&style=flat&colorA=CC101F)
 
- [![Join the chat at https://gitter.im/tablatronix/WiFiManager](https://badges.gitter.im/tablatronix/WiFiManager.svg)](https://gitter.im/tablatronix/WiFiManager?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+ [![Join the chat at https://gitter.im/lbussy/AsyncWiFiManager](https://badges.gitter.im/lbussy/AsyncWiFiManager.svg)](https://gitter.im/lbussy/AsyncWiFiManager?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  
 The configuration portal is of the captive variety, so on various devices it will present the configuration dialogue as soon as you connect to the created access point.
 
@@ -32,7 +34,7 @@ First attempt at a library. Lots more changes and fixes to do. Contributions are
 [https://github.com/espressif/arduino-esp32](https://github.com/espressif/arduino-esp32)
 
 ### Known Issues
-* Documentation needs to be updated, see [https://github.com/tzapu/WiFiManager/issues/500](https://github.com/tzapu/WiFiManager/issues/500)
+* Documentation needs to be updated, see [https://github.com/lbussy/AsyncWiFiManager/issues/500](https://github.com/lbussy/AsyncWiFiManager/issues/500)
 -------
 
 ## Contents
@@ -189,7 +191,7 @@ lib_deps =
 ```
 [env]
 lib_deps =
-	https://github.com/tzapu/WiFiManager.git
+	https://github.com/lbussy/AsyncWiFiManager.git
 ```
 
 ## Documentation
@@ -230,7 +232,7 @@ IF YOU NEED TO SAVE PARAMETERS EVEN ON WIFI FAIL OR EMPTY, you must set `setBrea
     void          setBreakAfterConfig(boolean shouldBreak);
 ```
 
-See [AutoConnectWithFSParameters Example](https://github.com/tzapu/WiFiManager/tree/master/examples/AutoConnectWithFSParameters).
+See [AutoConnectWithFSParameters Example](https://github.com/lbussy/AsyncWiFiManager/tree/master/examples/AutoConnectWithFSParameters).
 ```cpp
 AsyncWiFiManager.setSaveConfigCallback(saveConfigCallback);
 ```
@@ -536,7 +538,7 @@ __THANK YOU__
 
 The esp8266 and esp32 arduino and idf maintainers!
 
-[Shawn A aka tablatronix](https://github.com/tablatronix)
+[Shawn A aka lbussy](https://github.com/lbussy)
 
 [liebman](https://github.com/liebman)
 
@@ -578,4 +580,4 @@ And countless others
  * http://www.esp8266.com/viewtopic.php?f=29&t=2520
  * https://github.com/chriscook8/esp-arduino-apboot
  * https://github.com/esp8266/Arduino/tree/master/libraries/DNSServer/examples/CaptivePortalAdvanced
- * Built by AlexT https://github.com/tzapu
+ * Built by AlexT https://github.com/lbussy

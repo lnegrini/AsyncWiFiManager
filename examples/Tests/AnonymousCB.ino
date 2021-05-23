@@ -1,13 +1,13 @@
-#include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
+#include <AsyncWiFiManager.h> // https://github.com/lbussy/AsyncWiFiManager
 
 bool _enteredConfigMode = false;
 
 void setup(){
 	Serial.begin(115200);
-	WiFiManager wifiManager;
+	AsyncWiFiManager wifiManager;
 
-	// wifiManager.setAPCallback([this](WiFiManager* wifiManager) {
-	wifiManager.setAPCallback([&](WiFiManager* wifiManager) {
+	// wifiManager.setAPCallback([this](AsyncWiFiManager* wifiManager) {
+	wifiManager.setAPCallback([&](AsyncWiFiManager* wifiManager) {
 		Serial.printf("Entered config mode:ip=%s, ssid='%s'\n", 
                         WiFi.softAPIP().toString().c_str(), 
                         wifiManager->getConfigPortalSSID().c_str());

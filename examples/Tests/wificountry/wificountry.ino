@@ -1,4 +1,4 @@
-#include <WiFiManager.h>
+#include <AsyncWiFiManager.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 
@@ -15,7 +15,7 @@ void mqttReconnect() {
 
 void setup() {
   Serial.begin(9600);
-     WiFiManager wifiManager;
+     AsyncWiFiManager wifiManager;
      wifiManager.setTimeout(180);
 
      if(!wifiManager.autoConnect("AutoConnectAP")) {
