@@ -1,20 +1,39 @@
 # AsyncWiFiManager
 Async ESP8266 WiFi Connection manager with fallback web configuration portal.
 
-:exclamation: This is a private repo fork for my personal use.  It should not be used by other projects.  This fork is early work to enable Async capabilities, not all paths have been tested.  Additonally, the below documentation has not been validated, so it may be lagging development.
+# WiFiManager
+## DEVELOPMENT Version
 
+ESP8266 WiFi Connection manager with fallback web configuration portal
+
+:warning: This Documentation is out of date, see notes below
+
+[![Build Status](https://travis-ci.org/tzapu/WiFiManager.svg?branch=master)](https://travis-ci.org/tzapu/WiFiManager)
+
+[![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiManager.svg?)](https://www.ardu-badge.com/WiFiManager)
+
+[![Build with PlatformIO](https://img.shields.io/badge/PlatformIO-Library-orange?)](https://platformio.org/lib/show/567/WiFiManager/installation)
+
+![ESP8266](https://img.shields.io/badge/ESP-8266-000000.svg?longCache=true&style=flat&colorA=CC101F)
+![ESP32](https://img.shields.io/badge/ESP-32-000000.svg?longCache=true&style=flat&colorA=CC101F)
+
+ [![Join the chat at https://gitter.im/tablatronix/WiFiManager](https://badges.gitter.im/tablatronix/WiFiManager.svg)](https://gitter.im/tablatronix/WiFiManager?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+ 
 The configuration portal is of the captive variety, so on various devices it will present the configuration dialogue as soon as you connect to the created access point.
 
-**This works with the ESP8266 Arduino platform with a recent stable release(2.0.0 or newer)**
+First attempt at a library. Lots more changes and fixes to do. Contributions are welcome.
+
+**This works with the ESP8266 Arduino platform**
 
 [https://github.com/esp8266/Arduino](https://github.com/esp8266/Arduino)
 
-**This works with the ESP32 Arduino platform with staging** 
+**This works with the ESP32 Arduino platform** 
 
 [https://github.com/espressif/arduino-esp32](https://github.com/espressif/arduino-esp32)
 
 ### Known Issues
-* Documentation needs to be created
+* Documentation needs to be updated, see [https://github.com/tzapu/WiFiManager/issues/500](https://github.com/tzapu/WiFiManager/issues/500)
+-------
 
 ## Contents
  - [How it works](#how-it-works)
@@ -166,13 +185,12 @@ lib_deps =
 	https://github.com/lbussy/AsyncWiFiManager.git#development
 ```
 
-<!-- If you want to install the development branch, then you'll need to use the `repository#tag` format instead:
 
 ```
 [env]
 lib_deps =
-	https://github.com/lbussy/AsyncWiFiManager.git#development
-``` -->
+	https://github.com/tzapu/WiFiManager.git
+```
 
 ## Documentation
 
@@ -204,7 +222,15 @@ void configModeCallback (AsyncWiFiManager *myAsyncWiFiManager) {
 ##### Save settings
 This gets called when custom parameters have been set **AND** a connection has been established. Use it to set a flag, so when all the configuration finishes, you can save the extra parameters somewhere.
 
-See [AutoConnectWithFSParameters Example](https://github.com/lbussy/AsyncWiFiManager/tree/development/examples/AutoConnectWithFSParameters).
+
+IF YOU NEED TO SAVE PARAMETERS EVEN ON WIFI FAIL OR EMPTY, you must set `setBreakAfterConfig` to true, or else saveConfigCallback will not be called.
+
+```C++
+//if this is set, it will exit after config, even if connection is unsuccessful.
+    void          setBreakAfterConfig(boolean shouldBreak);
+```
+
+See [AutoConnectWithFSParameters Example](https://github.com/tzapu/WiFiManager/tree/master/examples/AutoConnectWithFSParameters).
 ```cpp
 AsyncWiFiManager.setSaveConfigCallback(saveConfigCallback);
 ```
@@ -293,6 +319,8 @@ This will make use the specified IP configuration instead of using DHCP in stati
 AsyncWiFiManager.setSTAStaticIPConfig(IPAddress(192,168,0,99), IPAddress(192,168,0,1), IPAddress(255,255,255,0)); // optional DNS 4th argument
 ```
 There are a couple of examples in the examples folder that show you how to set a static IP and even how to configure it through the web configuration portal.
+
+NOTE: You should fill DNS server if you have HTTP requests with hostnames or syncronize time (NTP). It's the same as gateway ip or a popular (Google DNS: 8.8.8.8).
 
 #### Custom HTML, CSS, Javascript
 There are various ways in which you can inject custom HTML, CSS or Javascript into the configuration portal.
