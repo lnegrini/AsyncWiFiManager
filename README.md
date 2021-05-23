@@ -1,7 +1,7 @@
 # AsyncWiFiManager
 Async ESP8266 WiFi Connection manager with fallback web configuration portal.
 
-:exclamation: This is a private repo fork for my personal use. It should not be used by other projects. This fork is early work to enable Async capabilities, not all paths have been tested. Additonally, the below documentation has not been validated, so it may be lagging development.
+:exclamation: This is a private repo fork for my personal use. It should not be used by other projects. This fork is early work to enable Async capabilities, not all paths have been tested. Additonally, the below documentation has not been validated, so it may be lagging development.  Finally I did a LOT of global search/replaces, so some of those have absolutely done bad things.  You have been warned.
 
 # AsyncWiFiManager
 ## DEVELOPMENT Version
