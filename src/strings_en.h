@@ -1,10 +1,11 @@
 /**
  * strings_en.h
- * engligh strings for
+ * English strings for
  * AsyncWiFiManager, a library for the ESP8266/Arduino platform
  * for configuration of WiFi credentials using a Captive Portal
  * 
- * @author Creator lbussy
+ * @author Creator tzapu
+ * @author tablatronix
  * @author lbussy
  * @version 0.0.0
  * @license MIT

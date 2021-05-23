@@ -1287,10 +1287,13 @@ uint8_t AsyncWiFiManager::waitForConnectResult(uint32_t timeout)
         // @todo detect additional states, connect happens, then dhcp then get ip, there is some delay here, make sure not to timeout if waiting on IP
         if (status == WL_CONNECTED || status == WL_CONNECT_FAILED)
         {
+#ifdef AWM_DEBUG_LEVEL
+            Serial.println();
+#endif
             return status;
         }
 #ifdef AWM_DEBUG_LEVEL
-        DEBUG_AWM(DEBUG_VERBOSE, F("."));
+        Serial.print(".");
 #endif
         delay(100);
     }
@@ -1595,10 +1598,13 @@ bool AsyncWiFiManager::WiFi_scanNetworks(bool force, bool async)
             while (WiFi.scanComplete() == WIFI_SCAN_RUNNING)
             {
 #ifdef AWM_DEBUG_LEVEL
-                DEBUG_AWM(DEBUG_ERROR, ".");
+                Serial.print(".");
 #endif
                 delay(100);
             }
+#ifdef AWM_DEBUG_LEVEL
+            Serial.println();
+#endif
             _numNetworks = WiFi.scanComplete();
         }
         else if (res >= 0)
@@ -3487,7 +3493,7 @@ void AsyncWiFiManager::DEBUG_AWM(Generic text, Genericb textb)
 }
 
 template <typename Generic, typename Genericb>
-void AsyncWiFiManager::DEBUG_AWM(awm_debuglevel_t level, Generic text, Genericb textb)
+void AsyncWiFiManager::DEBUG_AWM(awm_debuglevel_t level, Generic text, Genericb textb, bool cr)
 {
     if (!_debug || _debugLevel < level)
         return;
@@ -3513,7 +3519,7 @@ void AsyncWiFiManager::DEBUG_AWM(awm_debuglevel_t level, Generic text, Genericb 
         uint32_t free = info.total_free_bytes;
         uint16_t max = info.largest_free_block;
         uint8_t frag = 100 - (max * 100) / free;
-        _debugPort.printf("[MEM] free: %5d | max: %5d | frag: %3d%% \n", free, max, frag);
+        _debugPort.printf("[MEM] free: %5d | max: %5d | frag: %3d%% %s", free, max, frag, cr ? "\n" : "");
 #endif
     }
     _debugPort.print(_debugPrefix);
@@ -3525,7 +3531,7 @@ void AsyncWiFiManager::DEBUG_AWM(awm_debuglevel_t level, Generic text, Genericb 
         _debugPort.print(" ");
         _debugPort.print(textb);
     }
-    _debugPort.println();
+    _debugPort.print(cr ? "\n" : ""); // Allow no \n after line
 }
 
 /**
@@ -4024,11 +4030,18 @@ void AsyncWiFiManager::WiFiEvent(WiFiEvent_t event, system_event_info_t info)
     if (event == SYSTEM_EVENT_STA_DISCONNECTED)
     {
 #ifdef AWM_DEBUG_LEVEL
+        Serial.println();
         DEBUG_AWM(DEBUG_VERBOSE, F("[EVENT] WIFI_REASON: "), info.disconnected.reason);
 #endif
         if (info.disconnected.reason == WIFI_REASON_AUTH_EXPIRE || info.disconnected.reason == WIFI_REASON_AUTH_FAIL)
         {
             _lastconxresulttmp = 7; // hack in wrong password internally, sdk emit WIFI_REASON_AUTH_EXPIRE on some routers on auth_fail
+        }
+        else if (info.disconnected.reason == WIFI_REASON_4WAY_HANDSHAKE_TIMEOUT)
+        {
+            // Hack to reset due to ESP not connecting after flashing
+            DEBUG_WM(DEBUG_VERBOSE, F("[EVENT] WIFI_REASON: WIFI_REASON_4WAY_HANDSHAKE_TIMEOUT detected, resetting."));
+            ESP.restart();
         }
         else
             _lastconxresulttmp = WiFi.status();

@@ -51,7 +51,7 @@ extern "C"
 #include "user_interface.h"
 }
 #include <ESP8266WiFi.h>
-#include <ESP8266WebServer.h>
+#include <AsyncWebServer.h>
 
 #ifdef AWM_MDNS
 #include <ESP8266mDNS.h>
@@ -73,9 +73,8 @@ extern "C"
 #ifdef AWM_WEBSERVERSHIM
 #include <AsyncWebServer.h>
 #else
-#include <ESP8266WebServer.h>
-// Forthcoming official ? probably never happening
-// https://github.com/esp8266/ESPWebServer
+#include <AsyncTCP.h>
+#include <AsyncWebServer.h>
 #endif
 #endif
 
@@ -645,11 +644,11 @@ private:
     void DEBUG_AWM(Generic text);
 
     template <typename Generic>
-    void DEBUG_AWM(awm_debuglevel_t level, Generic text);
+    void DEBUG_AWM(awm_debuglevel_t level, Generic text, bool cr = true);
     template <typename Generic, typename Genericb>
-    void DEBUG_AWM(Generic text, Genericb textb);
+    void DEBUG_AWM(Generic text, Genericb textb, bool cr = true);
     template <typename Generic, typename Genericb>
-    void DEBUG_AWM(awm_debuglevel_t level, Generic text, Genericb textb);
+    void DEBUG_AWM(awm_debuglevel_t level, Generic text, Genericb textb, bool cr = true);
 
     // callbacks
     // @todo use cb list (vector) maybe event ids, allow no return value
