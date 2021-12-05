@@ -1,13 +1,15 @@
 // Basic.ino
 // Simple autoConnect usage example
 
+#include <Arduino.h>
+
 #define WM_ASYNC // Turn on Async mode
 #include "AsyncWiFiManager.h" // https://github.com/lbussy/AsyncWiFiManager
 
 void setup() {
     // Put your setup code here, to run once:
 
-    Serial.begin(BAUD);
+    Serial.begin(9600);
 
     WiFi.mode(WIFI_STA); // Explicitly set mode, ESP defaults to STA+AP
     

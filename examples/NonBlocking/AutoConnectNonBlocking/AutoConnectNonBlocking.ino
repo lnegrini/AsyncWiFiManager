@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <AsyncWiFiManager.h> // https://github.com/tzapu/AsyncWiFiManager
 AsyncWiFiManager wm;
 

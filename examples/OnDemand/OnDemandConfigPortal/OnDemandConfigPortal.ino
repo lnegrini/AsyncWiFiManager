@@ -4,6 +4,9 @@
  * trigger pin will start a configPortal AP for 120 seconds then turn it off.
  * 
  */
+
+#include <Arduino.h>
+
 #include <AsyncWiFiManager.h> // https://github.com/tzapu/AsyncWiFiManager
 
 // select which pin will trigger the configuration portal when set to LOW
